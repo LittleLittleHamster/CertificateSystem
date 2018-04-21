@@ -1,0 +1,105 @@
+管理员表
+
+CREATE TABLE administrator(
+admin_id int not null primary key auto_increment,
+admin_name varchar(255) not null,
+admin_pass varchar(255) not null.
+admin_realname varchar(255) not null
+);
+
+
+CREATE TABLE `ca_center`.`administrator` (
+  `admin_id` INT NOT NULL AUTO_INCREMENT,
+  `admin_name` VARCHAR(255) NOT NULL,
+  `admin_pass` VARCHAR(255) NOT NULL,
+  `admin_realname` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`admin_id`));
+
+
+证书注册申请表
+
+CREATE TABLE register_applicant(
+apply_id int not null primary key auto_increment,
+applicant_id varchar(127) not null,
+applicant_name varchar(127) not null,
+applicant_email varchar(127) not null,
+applicant_phone varchar(20) not null,
+certificate_type int not null,
+applyreason varchar(511) not null,
+state int not null
+);
+
+
+CREATE TABLE `ca_center`.`register_applicant` (
+  `apply_id` INT NOT NULL AUTO_INCREMENT,
+  `applicant_id` VARCHAR(127) NOT NULL,
+  `applicant_name` VARCHAR(127) NOT NULL,
+  `applicant_email` VARCHAR(127) NOT NULL,
+  `applicant_phone` VARCHAR(20) NOT NULL,
+  `certificate_type` INT NOT NULL,
+  `applyreason` VARCHAR(511) NOT NULL,
+  `state` INT NOT NULL,
+  PRIMARY KEY (`apply_id`));
+
+
+
+
+CA证书表
+
+CREATE TABLE certificate(
+subject_id varchar(127) not null,
+issuer_id varchar(127) not null,
+serial_num int not null auto_increment,
+start_time timestamp not null,
+end_time timestamp not null,
+sub_pub_algo int not null,
+sub_pub_key varchar(255) not null,
+signature varchar(255) not null,
+certificate_type int not null
+);
+
+CREATE TABLE `ca_center`.`certificate` (
+  `subject_id` VARCHAR(127) NOT NULL,
+  `issuer_id` VARCHAR(127) NOT NULL,
+  `serial_num` INT NOT NULL,
+  `start_time` TIMESTAMP(6) NOT NULL,
+  `end_time` TIMESTAMP(6) NOT NULL,
+  `sub_pub_algo` INT NOT NULL,
+  `sub_pub_key` VARCHAR(255) NOT NULL,
+  `signature` VARCHAR(255) NOT NULL,
+  `certificate_type` INT NOT NULL,
+  PRIMARY KEY (`serial_num`));
+
+
+
+用户密钥表
+
+CREATE TABLE `ca_center`.`user_key` (
+  `user_id` VARCHAR(127) NOT NULL,
+  `key_type` INT NOT NULL,
+  `algorithm` INT NOT NULL,
+  `key_val` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`user_id`, `key_type`));
+
+
+密钥备份表
+
+
+CREATE TABLE `ca_center`.`user_key_backup` (
+  `user_id` VARCHAR(127) NOT NULL,
+  `algorithm` INT NOT NULL,
+  `auth_info` VARCHAR(127) NOT NULL,
+  `key_val` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`user_id`));
+
+
+日志记录表
+
+CREATE TABLE `ca_center`.`event_log` (
+  `event_date` TIMESTAMP(6) NOT NULL,
+  `event_type` INT NOT NULL,
+  `event_content` VARCHAR(511) NOT NULL,
+  `event_id` INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`event_id`));
+
+
